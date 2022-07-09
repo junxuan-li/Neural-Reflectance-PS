@@ -1,0 +1,57 @@
+dataset:
+  data_path: ./data/DiLiGenT/pmsData/pot1PNG
+  gray_scale: false
+  shadow_threshold: 0.1
+experiment:
+  batch_size: 8 * 1
+  cuda: cuda:0
+  end_epoch: 600
+  eval_every_iter: 100
+  log_path: ./runs/paper_config/diligent/pot1
+  randomseed: null
+  save_every_epoch: 100
+  start_epoch: 1
+loss:
+  contour_factor: 0.1
+  diff_tv_factor: 0.01
+  normal_tv_factor: 0.01
+  regularize_epoches: 0.33333333
+  rgb_loss: l1
+  spec_tv_factor: 0.01
+models:
+  cast_shadow_sample_points: 32
+  checkpoint_path: null
+  depth:
+    hidden_size: 256
+    include_input_input: 2
+    num_encoding_fn_input: 10
+    num_layers: 8
+    skip_connect_every: 4
+    type: MLP_base
+  load_checkpoint: false
+  nerf:
+    hidden_size: 256
+    include_input_input1: 2
+    include_input_input2: 0
+    num_encoding_fn_input1: 10
+    num_encoding_fn_input2: 0
+    num_layers: 8
+    skip_connect_every: 3
+    type: NeRFModel
+  specular:
+    hidden_size: 64
+    input_halfangle_ch: 2
+    num_basis: 9
+    num_encoding_fn_input: 3
+    num_layers: 3
+    skip_connect_every: 8
+    type: MLP_Spec
+  use_depth: 501
+  use_mean_var: true
+  use_specular: true
+optimizer:
+  lr: 0.0005
+  type: Adam
+scheduler:
+  gamma: 1
+  step_size: 500000

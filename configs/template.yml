@@ -1,0 +1,85 @@
+# Parameters to setup experiment.
+experiment:
+  # Experiment logs will be stored at "log_path"
+  log_path:
+  cuda: cuda:0
+  # Seed for random number generators.
+  randomseed:
+  # Number of training iterations.
+  start_epoch: 1
+  end_epoch: 600
+  # Number of rays to use per iteration, i.e. batch size
+  batch_size: 8 * 1
+  # Number of training iterations after which to checkpoint.
+  save_every_epoch: 100
+  # Number of training iterations aftger which to print progress.
+  eval_every_iter: 100
+
+# Dataset parameters.
+dataset:
+  # Base directory of dataset.
+  data_path:
+  gray_scale: False
+  shadow_threshold: 0.1
+
+# Model parameters.
+models:
+  load_checkpoint: False
+  checkpoint_path:
+
+  cast_shadow_sample_points: 32
+  # nerf model.
+  nerf:
+    type: NeRFModel
+    num_layers: 8
+    hidden_size: 256
+    skip_connect_every: 3
+    num_encoding_fn_input1: 10
+    num_encoding_fn_input2: 0
+    include_input_input1: 2   # denote images coordinates (ix, iy)
+    include_input_input2: 0
+
+  use_specular: True
+  specular:
+    type: MLP_Spec
+    num_layers: 3
+    hidden_size: 64
+    skip_connect_every: 8
+    num_encoding_fn_input: 3
+    input_halfangle_ch: 2   # halfangle: [theta_h, theta_d]
+    num_basis: 9  # number of basis to output
+
+  use_depth: 501  # update depth model at ? epoch
+  depth:
+    type: MLP_base
+    num_layers: 8
+    hidden_size: 256
+    skip_connect_every: 4
+    num_encoding_fn_input: 10
+    include_input_input: 2   # denote images coordinates (ix, iy)
+
+  use_mean_var: True
+
+# indexer params.
+loss:
+  # Name of loss function
+  rgb_loss: l1   # options are 'l1', 'l2', 'smoothl1', 'MaxConstrain_L1Loss'
+  diff_tv_factor: 1.0E-2
+  spec_tv_factor: 1.0E-2
+  normal_tv_factor: 1.0E-2
+  contour_factor: 1.0E-1  # for constrain normals at contour to be 90degrees
+  regularize_epoches: 0.33333333
+
+# Optimizer params.
+optimizer:
+  # Name of the torch.optim class used for optimization.
+  type: Adam
+  # Learning rate.
+  lr: 5.0E-4
+
+# scheduler params.
+scheduler:
+  # Change learning rate Per ? epoch
+  step_size: 500000
+  # rate that learning rate degrade, 1 is not changing
+  gamma: 1

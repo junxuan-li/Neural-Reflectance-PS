@@ -1,0 +1,19 @@
+name: neural_reflectance
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.8
+  - cudatoolkit=11.3
+  - pytorch==1.10.1  # tested on pytorch=1.10 but other versions should also work
+  - torchvision==0.11.2
+  - configargparse
+  - matplotlib
+  - imageio
+  - pyyaml
+  - tensorboard
+  - scipy
+  - openexr-python
+  - pip
+  - pip:
+    - opencv-python-headless
