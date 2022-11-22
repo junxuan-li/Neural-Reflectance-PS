@@ -1,7 +1,7 @@
 # Neural Reflectance for Shape Recovery with Shadow Handling
 > [Junxuan Li](https://junxuan-li.github.io/), and Hongdong Li. 
 > CVPR 2022 (Oral Presentation).
-## [Paper](https://arxiv.org/abs/2203.12909) | [Video](https://www.youtube.com/watch?v=-5httWqzvNI) 
+## [Paper](https://arxiv.org/abs/2203.12909) 
 We proposed a method for Photometric Stereo that
 * Formulated the **shape** estimation and **material** estimation in a **self-supervised** framework which explicitly predicted **shadows** to mitigate the errors.
 * Achieved the **state-of-the-art** performance in surface normal estimation and been an order of magnitude **faster** than previous methods. 
